@@ -38,12 +38,12 @@ node {
               }
             }
 	  }
+	}
 
-	  stage("Git release: ${application}") {
-            println chart.version
-            sh 'echo "Creating a new release in github"'
-            sh "github-release-wrapper ${chart.version}"
-	  }
+	stage("Git release: ${application}") {
+          println chart.version
+          sh 'echo "Creating a new release in github"'
+          sh "github-release-wrapper ${chart.version}"
 	}
       }
     }
