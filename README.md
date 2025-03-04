@@ -1,50 +1,11 @@
 # Elastic Stack Kubernetes Helm Charts
 
-[![Build Status](https://img.shields.io/jenkins/s/https/devops-ci.elastic.co/job/elastic+helm-charts+main.svg)](https://devops-ci.elastic.co/job/elastic+helm-charts+main/) [![Artifact HUB](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/elastic)](https://artifacthub.io/packages/search?repo=elastic)
+This is a fork of the [Elastic Helm Charts repository](https://github.com/elastic/helm-charts).
 
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
-
-- [Supported Configurations](#supported-configurations)
-  - [Stack Versions](#stack-versions)
-  - [Kubernetes Versions](#kubernetes-versions)
-  - [Helm Versions](#helm-versions)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-<!-- Use this to update TOC: -->
-<!-- docker run --entrypoint doctoc --rm -it -v $(pwd):/usr/src jorgeandrada/doctoc README.md --github --no-title -->
-
-These Helm charts are designed to be a lightweight way to configure Elastic
-official Docker images.
-
-> **Warning**
-> When it comes to running the Elastic on Kubernetes infrastructure, we
-> recommend [Elastic Cloud on Kubernetes][] (ECK) as the best way to run and manage
-> the Elastic Stack.
->
-> ECK offers many operational benefits for both our basic-tier and our
-> enterprise-tier customers, such as spinning up cluster nodes that were lost on
-> failed infrastructure, seamless upgrades, rolling cluster changes, and much
-> much more.
->
-> With the release of the Elastic Stack Helm charts for Elastic version 8.5.1,
-> we are handing over the ongoing maintenance of our Elastic Stack Helm charts
-> to the community and contributors. This repository will finally be archived
-> after 6 months time. Elastic Stacks deployed on Kubernetes through Helm charts
-> will still be fully supported under EOL limitations.
->
-> Since we want to provide an even better experience for our customers by
-> running the Elastic Stack on Kubernetes, we will continue maintaining the
-> Helm charts applicable to ECK Custom Resources. These charts can be found in
-> the [ECK repository][eck-charts].
->
-> Helm charts will currently be maintained for ECK Enterprise-tier customers,
-> however, we encourage the community to engage with the existing Helm charts
-> for the Elastic Stack and continue supporting their ongoing maintenance.
->
-> See https://github.com/elastic/helm-charts/issues/1731 for more details.
-
+The original repo is archived and [Elastic Cloud on
+Kubernetes](https://github.com/elastic/cloud-on-k8s) is now the recommended way
+to run Elastic on Kubernetes. However, we only need a tiny subset of the
+applications and decided to create a fork.
 
 ## Supported Configurations
 
