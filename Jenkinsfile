@@ -13,9 +13,9 @@ node {
   stage('Test') {
     applications.each { application ->
       dir(application) {
-	stage("Test: ${application}") {
-	  sh "make test"
-	}
+	      stage("Test: ${application}") {
+	        sh "make test"
+	      }
       }
     }
   }
@@ -27,24 +27,29 @@ node {
       }
 
       applications.each { application ->
-	dir(application) {
+	      dir(application) {
 
-	  chart = readYaml file: 'Chart.yaml'
+	        chart = readYaml file: 'Chart.yaml'
 
-	  stage("Chartmuseum release: ${application}") {
+	        stage("Chartmuseum release: ${application}") {
             withCredentials([[$class: 'StringBinding', credentialsId: 'HELM_USER', variable: 'user']]) {
               withCredentials([[$class: 'StringBinding', credentialsId: 'HELM_PASSWORD', variable: 'password']]) {
-		sh "HELM_REPO_USERNAME=\"${env.user}\" HELM_REPO_PASSWORD=\"${env.password}\" helm cm-push ./ chartmuseum"
+		            sh "HELM_REPO_USERNAME=\"${env.user}\" HELM_REPO_PASSWORD=\"${env.password}\" helm cm-push ./ chartmuseum"
               }
             }
-	  }
-	}
-
-	stage("Git release: ${application}") {
-          println chart.version
-          sh 'echo "Creating a new release in github"'
-          sh "github-release-wrapper ${chart.version}"
-	}
+	        }
+	        stage("Git release: ${application}") {
+            println chart.version
+              sh 'echo "Creating a new release in github"'
+              sh "github-release-wrapper ${chart.version}"
+	        }
+          stage("Push chart to ECR: ${application}") {
+            sh "cd .. && \
+              helm package ${application} && \
+              helm push ${chart.name}-${chart.version}.tgz oci://276018124710.dkr.ecr.eu-west-1.amazonaws.com/charts/ && \
+              rm ${chart.name}-${chart.version}.tgz"
+          }
+	      }
       }
     }
   }
